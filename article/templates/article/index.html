@@ -1,0 +1,34 @@
+<div>
+    {% if user.is_authenticated %}
+    <h1 class="card-title">Добро пожаловать, <b>{{ user.username }}</b></h1>
+    <button type="button" class="btn btn-outline-secondary"><a href="{% url 'users:create_profile' user.id %}">Create Profile</a></button>
+    <button type="button" class="btn btn-outline-secondary"><a href="{% url 'users:profile' user.id %}">Profile</a></button>
+    <button type="button" class="btn btn-outline-secondary"><a href="{% url 'article:home' %}">Home</a></button>
+    <button type="button" class="btn btn-link btn-outline-secondary"><a href="{% url 'users:logout' %}">Выход</a></button>
+    {% else %}
+    <p>Уже есть аккаунт?</p>
+    <button type="button" class="btn btn-link btn-outline-secondary">
+        <h4><a href="{% url 'users:login' %}">Вход</a></h4>
+    </button>
+    {% endif %}
+</div>
+<div>
+    {% for c in cats %}
+    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+    {% endfor %}
+</div>
+
+
+<div>
+    {% for ar in posts %}
+    <h2>{{ ar.title }}</h2>
+    <p>{{ ar.content }}</p>
+
+    <a href="{% url 'article:detail' ar.id %}">More...</a>
+    {% endfor %}
+
+    <a href="{% url 'article:add_post' %}">addpost</a>
+
+
+
+</div>

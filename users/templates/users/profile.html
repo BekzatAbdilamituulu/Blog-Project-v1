@@ -1,0 +1,22 @@
+{% if user.is_authenticated %}
+<li>
+    <ol>Имя: {{user.username}}</ol>
+    <hr>
+    <ol>Фамилия: {{user.last_name}}</ol>
+    <hr>
+    <ol>Почта: {{user.email}}</ol>
+    <hr>
+    <ol>Биография: {{ dat.bio }}</ol>
+    <hr>
+    <ol>Номер телефона: {{ dat.phone_no }}</ol>
+    <hr>
+    <ol>Фейсбук: 5{{ dat.facebook }}</ol>
+    <hr>
+    {% if dat.image %}
+    <img src="{{ dat.image.url }}" alt="Фото профиля" width="200px" height="200px">
+    {% endif %}
+    <hr>
+</li>
+    {% endif %}
+
+<a href="{% url 'users:profile_update' user.id %}">update_profile</a>

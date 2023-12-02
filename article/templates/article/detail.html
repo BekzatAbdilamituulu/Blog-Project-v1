@@ -1,0 +1,37 @@
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<span>Posted by: {{ post.author }}</span>
+<p>{{ comments.text }}</p>
+
+<div>
+  {% for comment in comments %}
+  <h3>{{ comment.text }}</h3>
+  <p>coomment by <b>{{ comment.author }}</b> </p>
+  {% endfor %}
+</div>
+
+
+
+<div class="card-body">
+    {% if new_comment %}
+    {% else %}
+    <h3>Leave a comment</h3>
+    <form method="post" style="margin-top: 1.3em;">
+      {{ comment_form.as_p }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+    </form>
+    {% endif %}
+  </div>
+
+{% if post.author == request.user %}
+<a href="{% url 'article:update_post' post.pk %}">update</a>
+
+<form action="{% url 'article:delete_post' post.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" value="{{ post.id }}">
+  <input type="submit" value="Delete">
+</form>
+{% else %}
+нет доступа
+{% endif %}

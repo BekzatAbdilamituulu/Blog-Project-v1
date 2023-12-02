@@ -1,0 +1,10 @@
+<h1>Hi</h1>
+<button type="button" class="btn btn-outline-secondary"><a href="{% url 'article:home' %}">Home page</a></button>
+{% if user.is_authenticated %}
+<h5 class="card-title">Добро пожаловать, {{ user.username }}</h5>
+<button type="button" class="btn btn-outline-secondary"><a href="{% url 'article:home' %}">Home page</a></button>
+<button type="button" class="btn btn-link btn-outline-secondary"><a href="{% url 'users:logout' %}">Выход</a></button>
+{% else %}
+<p>Уже есть аккаунт?</p>
+<button type="button" class="btn btn-link btn-outline-secondary"><h4><a href="{% url 'users:login' %}">Вход</a></h4></button>
+{% endif %}
